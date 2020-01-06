@@ -1,0 +1,6 @@
+﻿  program.c
+D:\kywGitRepos\cosc292\intro\intro\program.c(39,1): warning C4305:  'initializing': truncation from 'double' to 'float'
+D:\kywGitRepos\cosc292\intro\intro\program.c(80,7): warning C4215:  nonstandard extension used: long float
+D:\kywGitRepos\cosc292\intro\intro\program.c(131,1): warning C4305:  'initializing': truncation from 'double' to 'float'
+D:\kywGitRepos\cosc292\intro\intro\program.c(149,1): warning C4305:  'initializing': truncation from 'double' to 'const float'
+  intro.vcxproj -> D:\kywGitRepos\cosc292\intro\Debug\intro.exe
