@@ -28,6 +28,11 @@ Integers stored as 4 bytes, which contain 8 bits
 	- x below becomes 00, 01, e2, 40 internally
 		- Converting to char only reads last byte, 40, so prints out @ (Hex 40 on ASCII is @)
 			- Nib 1 of last byte is 4, Nib 2 of last byte is 0
+
+Little/Big Endian
+	- Pointers in C point to certain side of a variable's memory block
+	- Little Endian starts at the "littlest" memory address, so the START of a value
+	- Big Endian starts at the "biggest" memory address, so the END of a value
 */
 #define PI 3.14159
 #define Radius 2
@@ -130,7 +135,7 @@ void CastDemo()
 	int x;
 	float y = 3.2;
 	float fahr = 32;
-	float celc;
+	float celc = 0;
 
 	//Assign y to x
 	x = (int) y;	//Casting it removes the loss of data error
@@ -168,8 +173,14 @@ void StringDemo()
 	sTwo[2] = 'h';
 	sTwo[3] = 'n';
 
+	//Make sure you always null terminate strings 
+	sTwo[4] = '\0';
+
+
 	printf("The value of string One (sOne) is %s\n", sOne);
+	printf("The size of the string in bytes is %d\n", sizeof(sOne));
 	printf("The value of string Two (sTwo) is %s\n", sTwo);
+	printf("The size of the string in bytes is %d\n", sizeof(sTwo));
 
 }
 
