@@ -1,0 +1,7 @@
+﻿  program.c
+D:\kywGitRepos\cosc292\InputFunctions\InputFunctions\program.c(20,7): warning C4101:  'cArray2': unreferenced local variable
+D:\kywGitRepos\cosc292\InputFunctions\InputFunctions\program.c(19,7): warning C4101:  'cArray': unreferenced local variable
+D:\kywGitRepos\cosc292\InputFunctions\InputFunctions\program.c(21,7): warning C4101:  'cBuffer': unreferenced local variable
+D:\kywGitRepos\cosc292\InputFunctions\InputFunctions\program.c(55,6): warning C4013:  'gets' undefined; assuming extern returning int
+D:\kywGitRepos\cosc292\InputFunctions\InputFunctions\program.c(55,6): warning C4013: D:\kywGitRepos\cosc292\InputFunctions\InputFunctions\program.c(57) : warning C4172: returning address of local variable or temporary: cBuffer
+  InputFunctions.vcxproj -> D:\kywGitRepos\cosc292\InputFunctions\Debug\InputFunctions.exe

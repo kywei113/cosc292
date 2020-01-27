@@ -1,0 +1,5 @@
+﻿  array_pointers.c
+D:\kywGitRepos\cosc292\Arrays_Pointers\Arrays_Pointers\array_pointers.c(34,9): warning C4477:  'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'char **'
+D:\kywGitRepos\cosc292\Arrays_Pointers\Arrays_Pointers\array_pointers.c(35,9): warning C4477:  'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'char *'
+D:\kywGitRepos\cosc292\Arrays_Pointers\Arrays_Pointers\array_pointers.c(36,9): warning C4477:  'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'void (__cdecl *)(char *)'
+  Arrays_Pointers.vcxproj -> D:\kywGitRepos\cosc292\Arrays_Pointers\Debug\Arrays_Pointers.exe
