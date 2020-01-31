@@ -95,12 +95,174 @@ int demoRead(const char* fileName, const char* fileMode)
 	return iErr;
 }
 
-int demoWrite(const char* fileName, const char* fileMode, const char* cPtr)
+int demoWrite(const char* fileName, const char* fileMode, const char* str)
 {
+	FILE* filePtr;
+	int iErr = EXIT_SUCCESS;
+	int retVal;
 
+
+	if ((filePtr = fopen(fileName, fileMode)) != NULL)
+	{
+		/*Useful functions
+			fwrite	- writes to a file
+			fprintf	- similar to printf, but prints out to a file rather than the console
+			fputs	- puts in a string
+			fputc	- puts in a single char
+		*/
+		retVal = fwrite((void*)str, sizeof(char), strlen(str), filePtr);
+
+		if (retVal > 0)
+		{
+			printf("File Written: %s\n", fileName);
+		}
+		else
+		{
+			if (iErr = ferror(filePtr))
+			{
+				printf("Error writing to the file %s: %s\n", fileName, strerror(iErr));
+			}
+			else
+			{
+				printf("Could not write the data\n");
+			}
+		}
+		fclose(filePtr);
+	}
+	else
+	{
+		printf("Error accessing the file %s: %s", fileName, strerror(iErr));
+	}
 }
 
 int demoWriteBinary(const char* fileName, const char* fileMode, const int* iPtr)
 {
+	FILE* filePtr;
+	int iErr = EXIT_SUCCESS;
+	int retVal;
+	
+	if ((filePtr = fopen(fileName, fileMode)) != NULL)
+	{
+		retVal = fwrite((void*)iPtr, sizeof(int), 1, filePtr);
 
+		if (retVal > 0)
+		{
+			printf("File Written: %s\n", fileName);
+		}
+		else
+		{
+			if (iErr = ferror(filePtr))
+			{
+				printf("Error writing to the file %s: %s\n", fileName, strerror(iErr));
+			}
+			else
+			{
+				printf("Could not write the data\n");
+			}
+		}
+		fclose(filePtr);
+	}
+	else
+	{
+		printf("Error accessing the file %s: %s", fileName, strerror(iErr));
+	}
+}
+
+//Exercises
+/*Write a function that will write out 3 records worth of information entered by the user.
+Each record consists of:
+	SIN# (Integer)
+	Name (char array of Max_Name_Size)
+This information is entered in using scanf and fgets (remember to flush the buffer after the scanf)
+
+After entering a record, write the data out to a binary file
+Repeat until 3 records have been written out.
+Do some error checking after each write
+Close the file
+
+Write code to read in the from the file and display the information contained within
+
+Wait until 11:50 AM
+Go for lunch
+*/
+int exerciseBinaryWrite(const char* fileName, const char* fileMode)
+{
+	FILE* filePtr;
+	int iErr = EXIT_SUCCESS;
+	int retVal;
+
+	char cNameBuffer[MAX_NAME_SIZE];
+	int ssn = 0;
+
+	if ((filePtr = fopen(fileName, fileMode)) != NULL)
+	{
+		for (int i = 0; i < NUM_RECORDS; i++)
+		{
+			printf("Enter a name:\n");
+			scanf("%s", cNameBuffer);
+			retVal = fwrite(cNameBuffer, sizeof(char), MAX_NAME_SIZE, filePtr);
+			fflush(filePtr);
+
+			printf("Enter a SSN:\n");
+			scanf("%d", &ssn);
+			retVal = fwrite((void*) &ssn, sizeof(int), 1, filePtr);
+			fflush(filePtr);
+		}
+
+		if (retVal > 0)
+		{
+			printf("File Written: %s\n", fileName);
+		}
+		else
+		{
+			if (iErr = ferror(filePtr))
+			{
+				printf("Error writing to the file %s: %s\n", fileName, strerror(iErr));
+			}
+			else
+			{
+				printf("Could not write the data\n");
+			}
+		}
+		fclose(filePtr);
+	}
+	else
+	{
+		printf("Error accessing the file %s: %s", fileName, strerror(iErr));
+	}
+}
+
+
+int exerciseBinaryRead(const char* fileName, const char* fileMode, int id)
+{
+	FILE* filePtr;
+	int iErr = EXIT_SUCCESS;
+	int retVal;
+
+	char cBuffer[MAX_NAME_SIZE];
+	int readSSN = 0;
+	int count = 0;
+	
+	if ((filePtr = fopen(fileName, fileMode)) != NULL)
+	{
+		while (count < NUM_RECORDS)
+		{
+			retVal = fread(cBuffer, sizeof(char), MAX_NAME_SIZE, filePtr);
+			retVal = fread((void*)&readSSN, sizeof(int), 1, filePtr);
+			count++;
+			
+			if (readSSN == id)
+			{
+				printf("%s: %d\n", cBuffer, readSSN);
+			}
+
+			fflush(filePtr);
+		}
+
+		fclose(filePtr);
+	}
+	else
+	{
+		printf("Error accessing the file %s: %s", fileName, strerror(iErr));
+	}
 }

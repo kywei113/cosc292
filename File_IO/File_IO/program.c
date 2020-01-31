@@ -14,9 +14,39 @@ void TestRead()
 	printf("The error number returned was %d\n", iErr);
 }
 
+void TestWrite()
+{
+	int iErr = demoWrite("foobar.txt", "w", "Hallowurld");
+	printf("The error number returned was %d\n", iErr);
+}
+
+void TestWriteBinary()
+{
+	int x = 123456789;
+	int iErr = demoWriteBinary("foobar.bin", "wb", &x);
+
+	printf("x in hex is %x\n", x);
+	printf("The error number returned was %d\n", iErr);
+}
+
+void TestExerciseWrite()
+{
+	exerciseBinaryWrite("exerciseWrite.txt", "wb");
+}
+
+void TestExerciseRead()
+{
+	exerciseBinaryRead("exerciseWrite.txt", "rb", 789);
+}
+
 int main(int ac, char** av)
 {
 	//TestOpenClose();
-	TestRead();
+	//TestRead();
+	//TestWrite();
+	//TestWriteBinary();
+	TestExerciseWrite();
+	TestExerciseRead();
+
 	return EXIT_SUCCESS;
 }
