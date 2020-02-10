@@ -1,7 +1,8 @@
 ﻿  fileio.c
 D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(42,6): warning C4101:  'intChar': unreferenced local variable
-D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(42,6): warning C4101: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(136) : warning C4716: 'demoWrite': must return a value
-D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(42,6): warning C4101: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(169) : warning C4716: 'demoWriteBinary': must return a value
-D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(42,6): warning C4101: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(233) : warning C4716: 'exerciseBinaryWrite': must return a value
-D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(42,6): warning C4101: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(268) : warning C4716: 'exerciseBinaryRead': must return a value
+D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(211,8): warning C4013:  'gets' undefined; assuming extern returning int
+D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(211,8): warning C4013: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(136) : warning C4716: 'demoWrite': must return a value
+D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(211,8): warning C4013: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(169) : warning C4716: 'demoWriteBinary': must return a value
+D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(211,8): warning C4013: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(241) : warning C4716: 'exerciseBinaryWrite': must return a value
+D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(211,8): warning C4013: D:\kywGitRepos\cosc292\File_IO\File_IO\fileio.c(293) : warning C4716: 'exerciseBinaryRead': must return a value
   File_IO.vcxproj -> D:\kywGitRepos\cosc292\File_IO\Debug\File_IO.exe

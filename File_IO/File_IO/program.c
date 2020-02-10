@@ -31,12 +31,17 @@ void TestWriteBinary()
 
 void TestExerciseWrite()
 {
-	exerciseBinaryWrite("exerciseWrite.txt", "wb");
+	exerciseBinaryWrite("exerciseWrite.bin", "wb");
 }
 
 void TestExerciseRead()
 {
-	exerciseBinaryRead("exerciseWrite.txt", "rb", 789);
+	int retVal = 0;
+	int sin = 0;
+	printf("Enter a SIN value to find\n");
+	retVal = scanf("%d", &sin);
+	exerciseBinaryRead("exerciseWrite.bin", "rb", sin);
+
 }
 
 int main(int ac, char** av)

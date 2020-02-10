@@ -190,23 +190,30 @@ int exerciseBinaryWrite(const char* fileName, const char* fileMode)
 	FILE* filePtr;
 	int iErr = EXIT_SUCCESS;
 	int retVal;
-
 	char cNameBuffer[MAX_NAME_SIZE];
 	int ssn = 0;
+	short numRecords = 0;
 
 	if ((filePtr = fopen(fileName, fileMode)) != NULL)
 	{
-		for (int i = 0; i < NUM_RECORDS; i++)
-		{
-			printf("Enter a name:\n");
-			scanf("%s", cNameBuffer);
-			retVal = fwrite(cNameBuffer, sizeof(char), MAX_NAME_SIZE, filePtr);
-			fflush(filePtr);
+		printf("How many records are you entering?\n");
+		retVal = scanf("%hi", &numRecords);
+		retVal = fwrite((void*)&numRecords, sizeof(short), 1, filePtr);
+		getc(stdin);	//Clears the stdin buffer of any hard return characters
 
-			printf("Enter a SSN:\n");
-			scanf("%d", &ssn);
-			retVal = fwrite((void*) &ssn, sizeof(int), 1, filePtr);
-			fflush(filePtr);
+		for (int i = 0; i < numRecords; i++)
+		{
+			printf("Enter a name\n");		//Reading in a name and SSN
+			//fgets(cNameBuffer, MAX_NAME_SIZE - 1, stdin);	//Safe way to get a string. It won't stop at first space/character break.
+			//However, fgets WILL read in the newline chaaracter and insert it into the string
+			//Alternatively, use:
+			gets(cNameBuffer);
+			printf("Enter a SSN\n");
+			retVal = scanf("%d", &ssn);
+			retVal = fwrite((void*)&ssn, sizeof(int), 1, filePtr);		//Flipping write order to allow for SSN reading before Name reading
+			retVal = fwrite(cNameBuffer, sizeof(char), MAX_NAME_SIZE, filePtr);
+
+			getc(stdin);	//Flush entries to file
 		}
 
 		if (retVal > 0)
@@ -232,33 +239,49 @@ int exerciseBinaryWrite(const char* fileName, const char* fileMode)
 	}
 }
 
-
+//Use fseek to reposition the pointer to the required position
 int exerciseBinaryRead(const char* fileName, const char* fileMode, int id)
 {
 	FILE* filePtr;
 	int iErr = EXIT_SUCCESS;
 	int retVal;
-
 	char cBuffer[MAX_NAME_SIZE];
-	int readSSN = 0;
-	int count = 0;
-	
+	int readSSN = 0;		//SSN that is read in from file
+	int count = 0;			//Loop counter
+	short numRecords = 0;	//short value read in from head of the file indicating maximum records
+	int found = 0;		//Integer flag to indicate if ID was found
+
 	if ((filePtr = fopen(fileName, fileMode)) != NULL)
 	{
-		while (count < NUM_RECORDS)
+		retVal = fread((void*)& numRecords, sizeof(short), 1, filePtr);
+
+		while (count < numRecords && !found)
 		{
-			retVal = fread(cBuffer, sizeof(char), MAX_NAME_SIZE, filePtr);
 			retVal = fread((void*)&readSSN, sizeof(int), 1, filePtr);
 			count++;
 			
-			if (readSSN == id)
+			if (readSSN == id)	//Checks if read in SSN value is equal to given ID
 			{
-				printf("%s: %d\n", cBuffer, readSSN);
+				found = 1;		//Set found flag to 1/true
+				retVal = fread(cBuffer, sizeof(char), MAX_NAME_SIZE, filePtr);	//Read in the name for the record
+				printf("Name: %s \t SSN: %d\n", cBuffer, readSSN);	//Print otu the record
 			}
-
-			fflush(filePtr);
+			else
+			{
+				//Moves 20 bytes forward from previous read offset
+				retVal = fseek(filePtr, 20, SEEK_CUR);
+				if (retVal != 0)
+				{
+					printf("Error occurred while seeking");
+				}
+			}
+			
 		}
 
+		if (!found)
+		{
+			printf("Record with SIN \"%d\" was not found", id);
+		}
 		fclose(filePtr);
 	}
 	else
